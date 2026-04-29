@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--  01-02-1 (4.2 Estructura de un feed de Instagram)  -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <title>Instagram Feed Layout</title>
+  <style>
+    /* Basic reset and font */
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #e1e1e1;
+    }
+    .user-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info {
+      flex: 1;
+    }
+    .left-icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+
+    .icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .count {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .right-icon {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .action-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px 10px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .small-heart {
+      font-size: 12px;
+    }
+
+    .post-image {
+      display: block;
+      width: 98%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      margin-bottom: 10px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .app-container {
+      display: grid;
+      /* TODO: Set grid-template-columns for left sidebar, main feed, and right sidebar */
+      grid-template-columns: 250px 1fr 350px;
+      gap: 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    /* TODO: Style sidebars and main feed with background colors for visibility */
+    .sidebar-left {
+      background-color: #f2f2f2;
+    }
+
+    .main-feed {
+      background-color: white;
+    }
+
+    .sidebar-right {
+      background-color: #f2f2f2;
+      padding: 1rem;
+    }
+
+    .suggestion-card {
+      margin: 0 0 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d9dee8;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    .suggestion-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .suggestion-title {
+      margin: 0 0 0.35rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .suggestion-text {
+      margin: 0;
+      color: #374151;
+      line-height: 1.35;
+    }
+
+    /* TODO: Add styles for navigation links inside left sidebar */
+    .sidebar-left nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar-left nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      text-decoration: none;
+      color: #003a8c;
+      font-weight: 500;
+    }
+
+    .sidebar-left .nav-icon {
+      width: 18px;
+      height: 18px;
+      stroke: #111;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* TODO: Add focus styles for accessibility */
+    .sidebar-left nav a:hover {
+      background-color: #f0f8ff; /* Un fondo azul muy claro */
+      color: #002c6a;
+      text-decoration: underline;
+    }
+
+    .sidebar-left nav a:focus-visible,
+    .bottombar a:focus-visible {
+      outline: 3px solid #1d4ed8;
+      outline-offset: 2px;
+      background-color: #e0ecff;
+      color: #001f4d;
+      text-decoration: underline;
+      border-radius: 6px;
+    }
+
+    .bottombar {
+      display: none;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 767px) {
+      .app-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 0;
+      }
+      .sidebar-left,
+      .sidebar-right {
+        display: none;
+      }
+      .main-feed {
+        padding-bottom: 80px; /* Space for bottombar */
+      }
+      .bottombar {
+      /* TODO: Show bottombar on mobile */
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-color: white;
+        border-top: 1px solid #dbdbdb;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 100;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar-left">
+      <nav aria-label="Navegación principal">
+        <!-- TODO: Add 7 navigation links with aria-labels -->
+        <ul>
+          <li><a href="#" aria-label="Ir a Inicio"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg><span>Inicio</span></a></li>
+          <li><a href="#" aria-label="Ir a Buscar"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-4.2-4.2"></path></svg><span>Buscar</span></a></li>
+          <li><a href="#" aria-label="Ir a Explorar"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m10 14 7-7-3 8-8 3 4-4z"></path></svg><span>Explorar</span></a></li>
+          <li><a href="#" aria-label="Ir a Mensajes"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v10H8l-4 4V6z"></path></svg><span>Mensajes</span></a></li>
+          <li><a href="#" aria-label="Ir a Notificaciones"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-4.2-8.5-7A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 8.5 8c-2.5 2.8-8.5 7-8.5 7z"></path></svg><span>Notificaciones</span></a></li>
+          <li><a href="#" aria-label="Ir a Crear"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Crear</span></a></li>
+          <li><a href="#" aria-label="Ir a Perfil"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"></path></svg><span>Perfil</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-feed">
+      <!-- TODO: Add main feed content -->
+       <div class="header">
+        <img class="user-photo" src="https://picsum.photos/50" alt="Foto de usuario" />
+        <div class="user-info">
+          <div class="username">Laskmit Yamaui</div>
+          <div class="location">Caracas, Venezuela</div>
+        </div>
+        <div class="menu"><i class="fas fa-ellipsis-v"></i></div>
+      </div>
+       <img class="post-image" src="https://picsum.photos/400/300" alt="Imagen del post" />
+        <div class="actions">
+          <div class="left-icons">
+            <div class="icon"><i class="far fa-heart"></i></div>
+            <div class="icon"><i class="far fa-comment"></i></div>
+            <div class="icon"><i class="fa-regular fa-paper-plane"></i></div>
+          </div>
+          <div class="right-icon"><i class="far fa-bookmark"></i></div>
+        </div>
+        <div class="action-label">
+          <i class="fas fa-heart small-heart"></i>
+          <span>212 likes</span>
+        </div>
+    </main>
+
+    <aside class="sidebar-right" aria-label="Sugerencias">
+      <!-- TODO: Add Suggestions for you panel -->
+      <div class="suggestion-card">
+        <p class="suggestion-title">Similares a ti</p>
+        <p class="suggestion-text">Cuenta recomendada por intereses similares a tu actividad reciente.</p>
+      </div>
+      <div class="suggestion-card">
+        <p class="suggestion-title">Populares en tu zona</p>
+        <p class="suggestion-text">Perfil popular en tu zona que podrías seguir para descubrir contenido local.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- TODO: Add bottombar for mobile navigation -->
+  <nav class="bottombar" aria-label="Navegacion inferior">
+        <ul>
+          <li><a href="#" aria-label="Ir a Inicio">Inicio</a></li>
+          <li><a href="#" aria-label="Ir a Buscar">Buscar</a></li>
+          <li><a href="#" aria-label="Ir a Crear">Crear</a></li>
+          <li><a href="#" aria-label="Ir a Reels">Reels</a></li>
+          <li><a href="#" aria-label="Ir a Perfil">Perfil</a></li>
+        </ul>
+      </nav>
+</body>
+</html>
