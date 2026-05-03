@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--  01-02-2 (1.1 Estructura publicación de Instagram)  -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <title>Instagram Post Card</title>
+  <style>
+    /* Basic reset and font */
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #e1e1e1;
+    }
+    .user-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info {
+      flex: 1;
+    }
+
+    .username {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .left-icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+
+    .icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    .count {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .right-icon {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    .metadatos {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 0 10px 10px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .likes-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .small-heart {
+      font-size: 12px;
+    }
+
+    .post-image {
+      display: block;
+      width: 98%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      margin-bottom: 10px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .main-feed {
+      background-color: white;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 767px) {
+      .main-feed {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Article container con main-feed para contener la publicación de Instagram -->
+  <article class="main-feed">
+    <!-- Header with user info (avatar, username, options button) -->
+    <header class="header">
+      <img class="user-photo" src="https://picsum.photos/50" alt="Foto de Laskmit Yamaui" aria-label="Laskmit Yamaui" />
+      <div class="user-info">
+        <h2 class="username">Laskmit Yamaui</h2>
+        <div class="location">Caracas, Venezuela</div>
+      </div>
+      <button class="menu" type="button" aria-label="Opciones de la publicación"><i class="fas fa-ellipsis-v"></i></button>
+    </header>
+    <!-- Post image -->
+    <img class="post-image" src="https://picsum.photos/400/300" alt="Imagen del post" />
+    <!-- Action buttons (like, comment, share) -->
+    <div class="actions">
+      <div class="left-icons">
+        <button class="icon" type="button" aria-label="Me gusta"><i class="far fa-heart"></i></button>
+        <button class="icon" type="button" aria-label="Comentar"><i class="far fa-comment"></i></button>
+        <button class="icon" type="button" aria-label="Compartir"><i class="fa-regular fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <!-- Metadata (likes count, caption, timestamp) -->
+    <div class="metadatos">
+      <div class="likes-row">
+        <i class="fas fa-heart small-heart" aria-hidden="true"></i>
+        <span>212 likes</span>
+      </div>
+      <span><strong>Laskmit Yamaui</strong> compartió este momento en Caracas.</span>
+      <a href="#" aria-label="Ver comentarios">Comentarios (0)</a>
+      <time class="timestamp" datetime="2026-05-01T10:00:00-04:00">Hace 2 horas</time>
+    </div>
+  </article>
+</body>
+</html>

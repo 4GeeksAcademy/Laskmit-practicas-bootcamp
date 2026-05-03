@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--  01-03-2 (1-3 Formulario de registro (crear cuenta completado con IA))  -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Crear Cuenta</h2>
+    <form id="signupForm" class="space-y-6">
+      <div>
+        <label for="email" class="block mb-2 font-medium">Correo Electrónico</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          placeholder="tucorreo@ejemplo.com"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+      </div>
+
+      <div>
+        <label for="password" class="block mb-2 font-medium">Contraseña</label>
+        <div class="flex items-stretch gap-2">
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            required 
+            placeholder="Introduce tu contraseña"
+            class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+          <button 
+            type="button" 
+            id="togglePassword" 
+            aria-label="Mostrar u ocultar contraseña"
+            aria-controls="password"
+            aria-pressed="false"
+            class="px-4 py-2 border border-gray-300 rounded-md text-sm text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            Mostrar
+          </button>
+        </div>
+        <p class="mt-1 text-xs text-gray-600">Al menos 8 caracteres con un número</p>
+        <div class="mt-2">
+          <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div id="passwordStrengthBar" class="h-2 w-0 bg-gray-300 transition-all"></div>
+          </div>
+          <p id="passwordStrengthText" class="mt-1 text-xs text-gray-600">Fortaleza: muy baja</p>
+        </div>
+      </div>
+
+      <button 
+        type="submit" 
+        class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
+      >
+        Crear Cuenta
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // TODO: Implement toggle password visibility
+    const passwordInput = document.getElementById('password');
+    const toggleBtn = document.getElementById('togglePassword');
+    const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+    const passwordStrengthText = document.getElementById('passwordStrengthText');
+
+    function getPasswordStrength(password) {
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+      if (/\d/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+      return score;
+    }
+
+    function updatePasswordStrength(password) {
+      const score = getPasswordStrength(password);
+
+      let width = '0%';
+      let color = 'bg-gray-300';
+      let label = 'Fortaleza: muy baja';
+      let textColor = 'text-gray-600';
+
+      if (score === 1) {
+        width = '25%';
+        color = 'bg-red-500';
+        label = 'Fortaleza: debil';
+        textColor = 'text-red-600';
+      } else if (score === 2) {
+        width = '50%';
+        color = 'bg-yellow-500';
+        label = 'Fortaleza: media';
+        textColor = 'text-yellow-700';
+      } else if (score === 3) {
+        width = '75%';
+        color = 'bg-blue-500';
+        label = 'Fortaleza: buena';
+        textColor = 'text-blue-700';
+      } else if (score === 4) {
+        width = '100%';
+        color = 'bg-green-500';
+        label = 'Fortaleza: fuerte';
+        textColor = 'text-green-700';
+      }
+
+      passwordStrengthBar.className = `h-2 transition-all ${color}`;
+      passwordStrengthBar.style.width = width;
+      passwordStrengthText.textContent = label;
+      passwordStrengthText.className = `mt-1 text-xs ${textColor}`;
+    }
+
+    passwordInput.addEventListener('input', () => {
+      updatePasswordStrength(passwordInput.value);
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      // Your code here
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleBtn.textContent = 'Ocultar';
+        toggleBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        passwordInput.type = 'password';
+        toggleBtn.textContent = 'Mostrar';
+        toggleBtn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // Button handles Enter/Space by default, but this ensures consistent behavior.
+    toggleBtn.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        toggleBtn.click();
+      }
+    });
+
+    // TODO: Add form validation on submit
+    const form = document.getElementById('signupForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Your validation code here
+      if (passwordInput.value.length < 8 || !/\d/.test(passwordInput.value)) {
+        alert('La contraseña debe tener al menos 8 caracteres e incluir un número.');
+        passwordInput.focus();
+        return;
+      }
+      alert('¡Formulario enviado con éxito!');
+      form.reset();
+      toggleBtn.textContent = 'Mostrar';
+      toggleBtn.setAttribute('aria-pressed', 'false');
+      passwordInput.type = 'password';
+      updatePasswordStrength('');
+    });
+
+    updatePasswordStrength('');
+  </script>
+</body>
+</html>
